@@ -1,0 +1,19 @@
+{
+  "name": "jwt_django_react",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukaKon/jwt_django_react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LukaKon/jwt_django_react/issues"
+  },
+  "homepage": "https://github.com/LukaKon/jwt_django_react#readme",
+  "description": ""
+}
