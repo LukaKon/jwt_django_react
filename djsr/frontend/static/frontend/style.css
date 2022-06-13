@@ -1,3 +1,9 @@
 #root{
-    background-color: rebeccapurple;
+    background-color: rgb(141, 108, 174);
+}
+
+.nav-link{
+    color: white;
+    border: 1px solid,white;
+    padding: 1em;
 }
