@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 class ObtainTokenPairWithColorView(TokenObtainPairView):
-    # permission_classes=(permissions.AllowAny,)
+    permission_classes=(permissions.AllowAny,)
     serializer_class=MyTokenObtainPairSerializer
 
 class CustomUserCreate(APIView):
