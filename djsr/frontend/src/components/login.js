@@ -18,27 +18,44 @@ export const Login = () => {
             // .post("token/obtain/", data)
             // .then((resp) => console.log(resp));
 
-            axiosInstance.post("token/obtain/", data).then((response) => {
-                console.log(response);
-            });
-
-            // {
-            //     username: form.username,
-            //     password: form.password,
+            const response = axiosInstance
+                .post("token/obtain/", data)
+                .then((response) => {
+                    console.log(response);
+                });
+            // const response = axiosInstance.post("token/obtain", {
+            // username: form.username,
+            // password: form.password,
             // });
-            // console.log("resp: ", response.data);
-            // axiosInstance.defaults.headers["Authorization"] =
-            // "JWT " + response.data.access;
 
-            // localStorage.setItem("access_token", response.data.access);
-            // localStorage.setItem("refresh_token", response.data.refresh);
-            // console.log("storage: ", localStorage);
+            axiosInstance.defaults.headers["Authorization"] =
+                "JWT " + response.data.access;
 
-            // return data;
-            return {};
+            localStorage.setItem("access_token", response.data.access);
+            localStorage.setItem("refresh_token", response.data.refresh);
+
+            return data;
         } catch (error) {
             throw error;
         }
+    };
+
+    const handleSubmitWThen = (e) => {
+        e.preventDefault();
+        axiosInstance
+            .post("token/obtain", {
+                username: form.username,
+                password: form.password,
+            })
+            .then((res) => {
+                axiosInstance.defaults.headers["Authorization"] =
+                    "JWT " + res.data.access;
+                localStorage.setItem("access_token", res.data.access);
+                localStorage.setItem("refresh_token", res.data.refresh);
+            })
+            .catch((error) => {
+                throw error;
+            });
     };
 
     const handleChange = (e) => {

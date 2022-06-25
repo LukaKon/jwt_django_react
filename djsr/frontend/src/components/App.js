@@ -1,8 +1,8 @@
 import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-// import Login from "./login";
 import { Login } from "./login";
 import { Signup } from "./signup";
+import { Hello } from "./hello";
 import { Link } from "@mui/material";
 
 export const App = () => {
@@ -15,24 +15,21 @@ export const App = () => {
                 <Link className="nav-link" href="/login/">
                     Login
                 </Link>
-                <Link className="nav-ling" href="/signup/">
+                <Link className="nav-link" href="/signup/">
                     Signup
+                </Link>
+                <Link className="nav-link" href="/hello/">
+                    Hello
                 </Link>
             </nav>
             <main>
-                <h1>
-                    Ahhh, after 10,000 years I'm free. Time to conquer the
-                    Earth!
-                </h1>
+                <h1>Main page loaded...</h1>
                 <BrowserRouter>
                     <Routes>
                         <Route exact path="login" element={<Login />} />
                         <Route path="signup" element={<Signup />} />
-                        <Route
-                            // exact
-                            path="/"
-                            render={() => <div>Home again</div>}
-                        />
+                        <Route path="hello" element={<Hello />} />
+                        <Route path="/" render={() => <div>Home again</div>} />
                     </Routes>
                 </BrowserRouter>
             </main>
