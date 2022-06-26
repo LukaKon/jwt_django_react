@@ -4,58 +4,26 @@ import { axiosInstance } from "../axiosApi";
 export const Login = () => {
     const [form, setForm] = useState({ username: "", password: "" });
 
-    const handleSubmit = (e) => {
-        let data = new FormData(e.currentTarget);
-        data = {
-            username: data.get("username"),
-            password: data.get("password"),
+    const handleSubmit = async (e) => {
+        let user_data = new FormData(e.currentTarget);
+        user_data = {
+            username: form.username,
+            password: form.password,
         };
 
         console.log(`Data submitted: ${form.username} and ${form.password}`);
         e.preventDefault();
         try {
-            // const response = axiosInstance
-            // .post("token/obtain/", data)
-            // .then((resp) => console.log(resp));
-
-            const response = axiosInstance
-                .post("token/obtain/", data)
-                .then((response) => {
-                    console.log(response);
-                });
-            // const response = axiosInstance.post("token/obtain", {
-            // username: form.username,
-            // password: form.password,
-            // });
-
+            const data = await axiosInstance.post("/token/obtain/", user_data);
+            console.log("data: ", data.data.refresh);
             axiosInstance.defaults.headers["Authorization"] =
-                "JWT " + response.data.access;
-
-            localStorage.setItem("access_token", response.data.access);
-            localStorage.setItem("refresh_token", response.data.refresh);
-
+                "JWT " + data.access;
+            localStorage.setItem("access_token", data.data.access);
+            localStorage.setItem("refresh_token", data.data.refresh);
             return data;
         } catch (error) {
             throw error;
         }
-    };
-
-    const handleSubmitWThen = (e) => {
-        e.preventDefault();
-        axiosInstance
-            .post("token/obtain", {
-                username: form.username,
-                password: form.password,
-            })
-            .then((res) => {
-                axiosInstance.defaults.headers["Authorization"] =
-                    "JWT " + res.data.access;
-                localStorage.setItem("access_token", res.data.access);
-                localStorage.setItem("refresh_token", res.data.refresh);
-            })
-            .catch((error) => {
-                throw error;
-            });
     };
 
     const handleChange = (e) => {
@@ -64,7 +32,6 @@ export const Login = () => {
             return { ...state, [name]: value };
         });
     };
-    // console.log("form: ", form);
     return (
         <div>
             Login
