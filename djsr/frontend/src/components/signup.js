@@ -16,9 +16,9 @@ export const Signup = () => {
             password: form.password,
             email: form.email,
         };
-        console.log(
-            `Data submitted: ${form.username}, ${form.email}, ${form.password}`
-        );
+        // console.log(
+        // `Data submitted: ${form.username}, ${form.email}, ${form.password}`
+        // );
         e.preventDefault();
         try {
             const response = await axiosInstance.post(
@@ -40,7 +40,7 @@ export const Signup = () => {
         });
     };
 
-    console.log("err: ", errors.error);
+    // console.log("err: ", errors.error);
     return (
         <div>
             Signup

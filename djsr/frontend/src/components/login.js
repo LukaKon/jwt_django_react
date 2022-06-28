@@ -11,11 +11,11 @@ export const Login = () => {
             password: form.password,
         };
 
-        console.log(`Data submitted: ${form.username} and ${form.password}`);
+        // console.log(`Data submitted: ${form.username} and ${form.password}`);
         e.preventDefault();
         try {
             const data = await axiosInstance.post("/token/obtain/", user_data);
-            console.log("data: ", data.data.refresh);
+            // console.log("data: ", data.data.refresh);
             axiosInstance.defaults.headers["Authorization"] =
                 "JWT " + data.access;
             localStorage.setItem("access_token", data.data.access);

@@ -4,8 +4,24 @@ import { Login } from "./login";
 import { Signup } from "./signup";
 import { Hello } from "./hello";
 import { Link } from "@mui/material";
+import { axiosInstance } from "../axiosApi";
 
 export const App = () => {
+    const handleLogout = async () => {
+        try {
+            const response = await axiosInstance.post("/blacklist/", {
+                refresh_token: localStorage.getItem("refresh_token"),
+            });
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("refresh_token");
+            axiosInstance.defaults.headers["Authorization"] = null;
+
+            return response;
+        } catch (e) {
+            console.log("error: ", e);
+        }
+    };
+
     return (
         <div className="site">
             <nav>
@@ -21,6 +37,7 @@ export const App = () => {
                 <Link className="nav-link" href="/hello/">
                     Hello
                 </Link>
+                <button onClick={handleLogout}>Logout</button>
             </nav>
             <main>
                 <h1>Main page loaded...</h1>
